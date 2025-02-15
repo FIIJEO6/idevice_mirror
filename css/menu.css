@@ -1,0 +1,229 @@
+/* CSS Document */
+
+.navbar-brand {
+    padding: 0;
+    margin: 0 5px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #85D8AA !important;
+    white-space: normal;
+}
+
+.navbar-toggler {
+    background-color: #85D8AA;
+    border: 1px solid transparent;
+    margin-right: 5px;
+}
+
+.navbar {
+    border: none;
+    background: #059848;
+    animation: fadeInDown 0.3s;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 0;
+    min-height: 40px !important;
+}
+
+.navbar-nav {
+    margin-top: 0;
+    line-height: 18px;
+}
+
+.navbar-nav>li {
+    margin-left: 0;
+    padding-bottom: 0;
+}
+
+.navbar-nav>li>a {
+    margin: 10px 0;
+    padding: 0 25px;
+    display: inline-block;
+    font-size: 12px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-right: 2px solid #6CD09A;
+}
+
+.navbar-nav>li:last-child>a {
+    border: 0;
+}
+
+.navbar-nav.navbar-right>li>a {
+    background: #000;
+    padding: 22px 20px;
+    margin: 0;
+    color: white;
+    border-radius: 0;
+}
+
+.navbar-nav.navbar-right>.active>a,
+.navbar-nav>.active>a,
+.navbar-nav>.active>a:focus {
+    color: #85D8AA;
+}
+
+.navbar-nav .dropdown:hover,
+.navbar-nav>li>a:hover,
+.navbar-nav>.active>a:hover,
+.navbar-nav>.open>a,
+.navbar-nav>.open>a:hover,
+.navbar-nav>.open>a:focus {
+    background-color: white;
+    color: #059848;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    margin: 0;
+    padding: 10px 27px;
+    margin-left: -2px;
+    border-right: 0;
+}
+
+.navbar-nav .dropdown a {
+    padding-right: 23px !important;
+}
+
+.navbar-nav .dropdown:hover {
+    padding: 0 2px 0 2px;
+}
+
+.navbar-nav .dropdown:hover a {
+    color: #059848;
+    border-right: 0;
+}
+
+.navbar-nav .dropdown-menu {
+    background-color: #white;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125);
+    border: 0;
+    padding: 0;
+    margin-top: 0;
+    border-top: 0;
+    border-radius: 0;
+    left: 0;
+    margin-top: -1px;
+    min-width: 180px;
+}
+
+.navbar-nav .dropdown-menu:before {
+    position: absolute;
+    top: 0;
+}
+
+.navbar-nav .dropdown-menu>li>a {
+    padding: 6px 15px;
+    color: #059848;
+    white-space: nowrap;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-weight: 400;
+}
+
+.navbar-nav .dropdown-menu>li:first-child>a {
+    border-top: 1px solid #ddd;
+}
+
+.navbar-nav .dropdown-menu>li:last-child>a {
+    border-bottom: 0;
+}
+
+.navbar-nav .dropdown-menu>li:hover>a,
+.navbar-nav .dropdown-menu>li:focus>a,
+.navbar-nav .dropdown-menu>li.active>a {
+    background-color: #E8E8E8;
+    color: #059848;
+}
+
+.navbar-nav .dropdown-menu>li:last-child>a {
+    border-radius: 0;
+}
+
+.navbar-nav .dropdown-menu>li.divider {
+    background-color: transparent;
+}
+
+.navbar-nav .dropdown-menu:before {
+    position: absolute;
+    top: -7px;
+    left: 9px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #fff;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+.navbar-nav .dropdown-menu:after {
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid white;
+    border-left: 7px solid transparent;
+    content: '';
+}
+
+.navbar-collapse,
+.navbar-form {
+    border-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-toggle {
+    background: #bd7b01;
+    border-radius: 0;
+    border-color: #bd7b01;
+}
+
+.navbar-toggle:focus,
+.navbar-toggle:hover {
+    background: #bd7b01;
+}
+
+.navbar-brand .site-name {
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.navbar-brand .slogan {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+@media only screen and (max-width:767px) {
+    .navbar-nav {
+        background: transparent;
+    }
+    .navbar-nav>li>a {
+        margin: 0;
+        padding: 5px 20px;
+        border-top: 1px solid #ddd;
+        width: 100%;
+    }
+    .navbar-collapse,
+    .navbar-form {
+        float: left;
+    }
+    .container>.navbar-collapse {
+        width: 100%;
+    }
+    .navbar-nav .dropdown-menu>li>a {
+        padding: 8px 30px;
+    }
+    .navbar-nav .dropdown-menu:before {
+        top: 27px;
+        display: inline-block;
+    }
+    .navbar-nav .dropdown-menu:after {
+        top: 26px;
+        display: inline-block;
+    }
+}
