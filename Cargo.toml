@@ -1,0 +1,24 @@
+[package]
+name = "idevice_mirror"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+idevice = { version = "0.1.42", features = [
+  "core_device_proxy",
+  "tunnel_tcp_stack",
+  "dvt",
+  "usbmuxd",
+  "rsd",
+  "xpc",
+] }
+tokio = { version = "1", features = ["full"] }
+egui = { version = "0.32" }
+egui_logger = { version = "0.8" }
+eframe = { version = "0.32" }
+rfd = { version = "0.15", features = ["gtk3"], default-features = false }
+plist = { version = "1.7" }
+log = { version = "0.4" }
+uuid = { version = "1.16", features = ["v4"] }
+futures-util = { version = "0.3" }
+image = "0.25.8"
