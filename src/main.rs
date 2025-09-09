@@ -1,7 +1,8 @@
 // Jackson Coxson
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
+use std::time::{Duration, Instant};
 
 use egui::{ColorImage, ComboBox, RichText, TextureHandle};
 use idevice::IdeviceService;
@@ -37,6 +38,10 @@ fn main() {
         show_logs: false,
         is_streaming: false,
         screenshot_texture: None,
+    // Stats
+    frame_times: VecDeque::with_capacity(120),
+    fps: 0.0,
+    fps_window: Duration::from_secs(2),
     };
 
     let d = eframe::icon_data::from_png_bytes(include_bytes!("../icon.png"))
@@ -269,6 +274,10 @@ struct MyApp {
     // Screenshot state
     is_streaming: bool,
     screenshot_texture: Option<TextureHandle>,
+    // Stats
+    frame_times: VecDeque<Instant>,
+    fps: f32,
+    fps_window: Duration,
     // Channel
     gui_recv: UnboundedReceiver<GuiCommands>,
     idevice_sender: UnboundedSender<IdeviceCommands>,
@@ -299,6 +308,22 @@ impl eframe::App for MyApp {
                     texture.set(color_image, Default::default());
                     // Request a repaint to show the new frame
                     ctx.request_repaint();
+
+                    // Update FPS stats based on arrival of frames
+                    let now = Instant::now();
+                    self.frame_times.push_back(now);
+                    // Retain only the timestamps within the window
+                    let cutoff = now - self.fps_window;
+                    while let Some(&front) = self.frame_times.front() {
+                        if front < cutoff {
+                            self.frame_times.pop_front();
+                        } else {
+                            break;
+                        }
+                    }
+                    // Compute FPS as count over window seconds
+                    let window_secs = self.fps_window.as_secs_f32().max(0.000_001);
+                    self.fps = (self.frame_times.len() as f32) / window_secs;
                 }
             },
             Err(e) => match e {
@@ -322,6 +347,10 @@ impl eframe::App for MyApp {
                 ui.heading("idevice mirror");
                 ui.separator();
                 ui.toggle_value(&mut self.show_logs, "logs");
+                if self.is_streaming {
+                    ui.separator();
+                    ui.label(format!("FPS: {:.1}", self.fps));
+                }
             });
 
             ui.separator();
@@ -393,6 +422,9 @@ impl eframe::App for MyApp {
                                 )))
                                 .unwrap();
                             self.is_streaming = true;
+                            // Reset stats for a fresh session
+                            self.frame_times.clear();
+                            self.fps = 0.0;
                         }
                     } else if ui.button("Stop Streaming").clicked() {
                         self.is_streaming = false;
@@ -400,6 +432,9 @@ impl eframe::App for MyApp {
                         self.idevice_sender
                             .send(IdeviceCommands::StopScreenshotStream)
                             .unwrap();
+                        // Clear stats when stopping
+                        self.frame_times.clear();
+                        self.fps = 0.0;
                     }
                 });
 
